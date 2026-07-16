@@ -1,37 +1,47 @@
-import flask
+from flask import Flask, render_template, request
 import pickle
 
-app = flask.Flask(__name__)
+# Flask application
+app = Flask(__name__)
 
-model = pickle.load(open("model.pkl", "rb"))
-vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+# Load trained model and vectorizer
+with open("model.pkl", "rb") as model_file:
+    model = pickle.load(model_file)
+
+with open("vectorizer.pkl", "rb") as vectorizer_file:
+    vectorizer = pickle.load(vectorizer_file)
+
 
 @app.route("/")
 def home():
-    return flask.render_template("ibm_index.html")
+    return render_template("ibm_index.html")
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    news = flask.request.form["news"]
+    # Get news text from form
+    news = request.form["news"]
 
-    news_vector = vectorizer.transform([news])
+    # Convert text into numerical format
+    transformed_news = vectorizer.transform([news])
 
-    prediction = model.predict(news_vector)
+    # Predict result
+    prediction = model.predict(transformed_news)
 
+    # Check prediction value
     if prediction[0] == 0:
         result = "Fake News"
     else:
         result = "Real News"
 
+    # Return result and keep news text in textarea
     return render_template(
-    "ibm_index.html", 
-
-     prediction_text=result,
-     news_text=news
+        "ibm_index.html",
+        prediction_text=result,
+        news_text=news
     )
 
-    
 
 if __name__ == "__main__":
     app.run(debug=True)
