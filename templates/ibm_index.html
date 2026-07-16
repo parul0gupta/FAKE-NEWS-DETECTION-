@@ -24,14 +24,14 @@
                 <label for="news">
                     Enter News Content
                 </label>
-
                 <textarea
-                    id="news"
-                    name="news"
-                    rows="12"
-                    placeholder="Paste or type the news article here..."
-                    required></textarea>
+                   id="news"
+                   name="news"
+                 rows="12"
+                 placeholder="Paste or type the news article here..."
+                  required>{{ news_text if news_text else '' }}</textarea>
 
+                
                 <div class="button-group">
                     <button type="submit">
                         Analyze News
