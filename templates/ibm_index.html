@@ -9,58 +9,77 @@
 </head>
 <body>
 
-    <div class="main-container">
+<div class="main-container">
 
-        <div class="card">
+    <div class="card">
 
-            <h1>Fake News Detection System</h1>
+        <div class="header">
+            <h1>📰 Fake News Detection System</h1>
 
             <p class="subtitle">
-                Detect whether a news article is Real or Fake using Machine Learning
+                Detect Fake and Real News Using Machine Learning
             </p>
+        </div>
 
-            <form action="/predict" method="POST">
+        <div class="info-cards">
 
-                <label for="news">
-                    Enter News Content
-                </label>
-
-                <textarea
-                    id="news"
-                    name="news"
-                    rows="12"
-                    placeholder="Paste or type the news article here..."
-                    required></textarea>
-
-                <div class="button-group">
-                    <button type="submit">
-                        Analyze News
-                    </button>
-
-                    <button type="reset" class="clear-btn">
-                        Clear
-                    </button>
-                </div>
-
-            </form>
-
-            {% if prediction_text %}
-
-            <div class="result-box">
-
-                <h2>Prediction Result</h2>
-
-                <p>{{ prediction_text }}</p>
-
+            <div class="info-box">
+                <h3>⚡ Fast Analysis</h3>
+                <p>Quick prediction results</p>
             </div>
 
-            {% endif %}
+            <div class="info-box">
+                <h3>📊 ML Model</h3>
+                <p>Logistic Regression</p>
+            </div>
+
+            <div class="info-box">
+                <h3>✅ Classification</h3>
+                <p>Fake or Real News</p>
+            </div>
 
         </div>
 
+        <form action="/predict" method="POST">
+
+            <label for="news">Enter News Content</label>
+
+            <textarea
+                id="news"
+                name="news"
+                rows="10"
+                placeholder="Paste or type the news article here..."
+                required></textarea>
+
+            <div class="button-group">
+
+                <button type="submit">
+                    Analyze News
+                </button>
+
+                <button type="reset" class="clear-btn">
+                    Clear
+                </button>
+
+            </div>
+
+        </form>
+
+        {% if prediction_text %}
+        <div class="result-box">
+
+            <h2>Prediction Result</h2>
+
+            <p>{{ prediction_text }}</p>
+
+        </div>
+        {% endif %}
+
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
