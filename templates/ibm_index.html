@@ -65,21 +65,110 @@
 
         </form>
 
+        <!-- Analysis Section -->
+        <div class="analysis-section">
+
+            <h2>📊 News Analysis</h2>
+
+            <div class="analysis-cards">
+
+                <div class="analysis-card">
+                    <h3>📝 Word Count</h3>
+                    <p id="wordCount">0</p>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>🔤 Character Count</h3>
+                    <p id="charCount">0</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Warning -->
+        <div class="warning-section">
+
+            <h2>⚠ Fake News Warning</h2>
+
+            <p>
+                Always verify information from trusted sources before sharing.
+                Fake news can spread misinformation and confusion.
+            </p>
+
+        </div>
+
+        <!-- Result -->
         {% if prediction_text %}
-        <div class="result-box">
+
+        <div class="result-box {{ result_class }}">
 
             <h2>Prediction Result</h2>
 
-            <p>{{ prediction_text }}</p>
+            <p class="prediction-text">
+                {{ prediction_text }}
+            </p>
+
+            <div class="confidence-box">
+
+                <h3>Confidence Score</h3>
+
+                <p>{{ confidence }}%</p>
+
+            </div>
 
         </div>
+
         {% endif %}
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+
+            <h2>📈 Prediction Dashboard</h2>
+
+            <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+                    <h3>Total Predictions</h3>
+                    <p id="totalPredictions">0</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Fake News Count</h3>
+                    <p id="fakeCount">0</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Real News Count</h3>
+                    <p id="realCount">0</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- History -->
+        <div class="history-section">
+
+            <h2>🕒 Prediction History</h2>
+
+            <ul id="historyList"></ul>
+
+        </div>
 
     </div>
 
 </div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% if prediction_text %}
+<script>
+window.addEventListener("load", function() {
+    updateDashboard("{{ prediction_text }}");
+});
+</script>
+{% endif %}
+
+<script src="{{ url_for('static', filename='ibm.js') }}"></script>
 
 </body>
 </html>
