@@ -16,7 +16,7 @@ def predict():
 
     news = request.form["news"]
 
-    # Convert text into TF-IDF features
+    # Convert text to TF-IDF
     news_vector = vectorizer.transform([news])
 
     # Prediction
@@ -30,7 +30,9 @@ def predict():
     except:
         confidence = 0
 
-    # Result Mapping
+    print("Confidence:", confidence)
+
+    # Result
     if prediction[0] == 0:
         result = "🚨 Fake News"
         result_class = "fake-result"

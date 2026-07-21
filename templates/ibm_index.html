@@ -6,8 +6,9 @@
     <title>Fake News Detection System</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <body>
 
 <div class="main-container">
@@ -16,7 +17,6 @@
 
         <div class="header">
             <h1>📰 Fake News Detection System</h1>
-
             <p class="subtitle">
                 Detect Fake and Real News Using Machine Learning
             </p>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="analysis-card">
-                    <h3>Reading Time</h3>
+                    <h3>📖 Reading Time</h3>
                     <p id="readingTime">0 min</p>
                 </div>
 
@@ -87,7 +87,7 @@
 
         </div>
 
-        <!-- Warning -->
+        <!-- Warning Section -->
         <div class="warning-section">
 
             <h2>⚠ Fake News Warning</h2>
@@ -98,40 +98,29 @@
             </p>
 
         </div>
+
+        <!-- Prediction Result -->
+        {% if prediction_text %}
         <div class="result-box {{ result_class }}">
 
-    <h2>Prediction Result</h2>
+            <h2>Prediction Result</h2>
 
-    <div class="result-circle">
+            <div class="result-circle">
 
-        <div class="circle
-        {% if 'Real' in prediction_text %}
-        real-circle
-        {% else %}
-        fake-circle
-        {% endif %}">
+                <div class="circle">
+                    <span id="resultPercent">
+                        {{ confidence }}%
+                    </span>
+                </div>
 
-            <span id="resultPercent">
-                {{ confidence }}%
-            </span>
+                <h2 id="resultText">
+                    {{ prediction_text }}
+                </h2>
+
+            </div>
 
         </div>
-
-        <h2 id="resultText">
-
-            {% if 'Real' in prediction_text %}
-                ✅ Real News
-            {% else %}
-                ❌ Fake News
-            {% endif %}
-
-        </h2>
-
-    </div>
-
-</div>
-
-        
+        {% endif %}
 
         <!-- Dashboard -->
         <div class="dashboard">
@@ -141,13 +130,14 @@
             <div class="dashboard-cards">
 
                 <div class="dashboard-card">
-                 <div class="dashboard-chart">
 
-    <canvas id="predictionChart"></canvas>
+                    <div class="dashboard-chart">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
 
-</div>   
                     <h3>Total Predictions</h3>
                     <p id="totalPredictions">0</p>
+
                 </div>
 
                 <div class="dashboard-card">
@@ -164,7 +154,6 @@
 
         </div>
 
-
         <!-- History -->
         <div class="history-section">
 
@@ -180,13 +169,15 @@
 
 {% if prediction_text %}
 <script>
-window.addEventListener("load", function() {
-    updateDashboard("{{ prediction_text }}");
+window.addEventListener("load", function () {
+    if (typeof updateDashboard === "function") {
+        updateDashboard("{{ prediction_text }}");
+    }
 });
 </script>
 {% endif %}
 
 <script src="{{ url_for('static', filename='ibm.js') }}"></script>
-<script src="{{ url_for('static', filename='ibm.js') }}"></script>
+
 </body>
-</html>
+</html>s
