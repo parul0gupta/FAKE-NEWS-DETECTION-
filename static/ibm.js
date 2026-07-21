@@ -225,3 +225,19 @@ function showMessage(message,type){
         div.remove();
     }, 3000);
 }
+const newsInput = document.getElementById("news");
+const wordCount = document.getElementById("wordCount");
+const readingTime = document.getElementById("readingTime");
+
+newsInput.addEventListener("input", () => {
+
+    let text = newsInput.value.trim();
+
+    let words = text === "" ? 0 : text.split(/\s+/).length;
+
+    wordCount.textContent = words;
+
+    let minutes = Math.ceil(words / 200);
+
+    readingTime.textContent = minutes + " min";
+});
