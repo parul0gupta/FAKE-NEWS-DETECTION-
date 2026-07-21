@@ -297,3 +297,21 @@ button:hover{
     max-width:350px;
     margin:30px auto;
 }
+.dashboard-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard-chart{
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.dashboard-chart canvas{
+    width: 100% !important;
+    height: 100% !important;
+}
